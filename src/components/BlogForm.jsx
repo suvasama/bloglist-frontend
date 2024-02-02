@@ -1,34 +1,46 @@
-import Blog from './Blog'
+import { useState } from "react"
 
-const BlogForm = (props) => {
+const BlogForm = ({ createBlog }) => {
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
+
+  const addBlog = (event) => {
+    event.preventDefault()
+    createBlog({
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl
+    })
+    setNewTitle('')
+    setNewAuthor('')
+    setNewUrl('')
+  }
   return (
     <>
-      <form onSubmit={props.onSubmit}>
+      <form onSubmit={addBlog}>
       <div>
         title: <input 
-          value={props.newTitle}
-          onChange={({ target }) => props.setNewTitle(target.value)}
+          value={newTitle}
+          onChange={({ target }) => setNewTitle(target.value)}
         />
       </div>
       <div>
         author: <input 
-          value={props.newAuthor}
-          onChange={({ target }) => props.setNewAuthor(target.value)}
+          value={newAuthor}
+          onChange={({ target }) => setNewAuthor(target.value)}
         />
       </div>
       <div>
         url: <input 
-          value={props.newUrl}
-          onChange={({ target }) => props.setNewUrl(target.value)}
+          value={newUrl}
+          onChange={({ target }) => setNewUrl(target.value)}
         />
       </div>
       <div>
         <button type="submit">create</button>
       </div>
     </form>
-      {props.blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
     </>
 )}
 
