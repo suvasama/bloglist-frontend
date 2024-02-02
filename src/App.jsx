@@ -12,7 +12,7 @@ import Togglable from './components/Togglable'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [info, setInfo] = useState({ message: null})
+  const [info, setInfo] = useState({ message: null })
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -36,7 +36,7 @@ const App = () => {
       message, type
     })
     setTimeout(() => {
-      setInfo({ message: null} )
+      setInfo({ message: null } )
     }, 3000)
   }
 
@@ -72,16 +72,16 @@ const App = () => {
       .update(blogId, blogObject)
     setBlogs(blogs.map(b => b.id !== blogId ? b :updatedBlog ))
   }
-  
+
   const removeBlog = async ( blog ) => {
     const ok = window.confirm(`remove blog ${blog.title} by ${blog.author}?`)
-      if ( ok ) {
-        await blogService.remove(blog.id)
-        setBlogs(blogs.filter(b => b.id !== blog.id))
-        notifyWith(`Blog ${blog.title} deleted!`)
+    if ( ok ) {
+      await blogService.remove(blog.id)
+      setBlogs(blogs.filter(b => b.id !== blog.id))
+      notifyWith(`Blog ${blog.title} deleted!`)
     }
   }
-  
+
   const blogFormRef = useRef()
   const blogForm = () => {
     return (
@@ -91,7 +91,7 @@ const App = () => {
           <BlogForm createBlog={addBlog} />
         </Togglable>
       </div>
-  )}
+    )}
   if (user === null) {
     return (
       <div>
@@ -101,24 +101,24 @@ const App = () => {
       </div>
     )
   }
-  
+
   return (
     <div>
       <div>
-      <h2>blogs</h2>
+        <h2>blogs</h2>
         <Notification info={info}/>
-          <p>
-            {user.name} logged in <button onClick={handleLogOut}>logout</button>
-          </p>
-        </div>
+        <p>
+          {user.name} logged in <button onClick={handleLogOut}>logout</button>
+        </p>
+      </div>
       {blogForm()}
       <div>
         {blogs.sort((a, b) => a.likes - b.likes).map(blog =>
-          <Blog key={blog.id} 
+          <Blog key={blog.id}
             blog={blog}
             user={user}
-            clickLike={addLike} 
-            clickRemove={removeBlog} 
+            clickLike={addLike}
+            clickRemove={removeBlog}
           />
         )}
       </div>
