@@ -34,14 +34,14 @@ const Blog = ({ blog, user, clickLike, clickRemove }) => {
     return (
       <div style={showWhenVisible}  className='togglableContent'>
         <a href={blog.url}>{blog.url}</a>
-        <div>likes {blog.likes} <button onClick={() => addLike(blog)}>like</button></div>
+        <div>likes {blog.likes} <button id='like-button' onClick={() => addLike(blog)}>like</button></div>
         <div>{blog.user.name}</div>
-        <button style={showOwnBlog} onClick={() => clickRemove(blog)}>remove</button>
+        <button id='remove-blog' style={showOwnBlog} onClick={() => clickRemove(blog)}>remove</button>
       </div>
     )}
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog'>
       {blog.title} {blog.author} <button
         onClick={toggleVisibility} style={hideWhenVisible}>view</button> <button
         onClick={toggleVisibility} style={showWhenVisible} className='togglableContent'>hide

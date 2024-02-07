@@ -12,7 +12,7 @@ const Notification = ({ info }) => {
     marginBottom: 10
   }
   return (
-    <div style={style}>
+    <div id='notification' style={style}>
       {info.message}
     </div>
   )

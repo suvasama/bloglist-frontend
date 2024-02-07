@@ -86,7 +86,7 @@ const App = () => {
   const blogForm = () => {
     return (
       <div>
-        <Togglable buttonLabel="new blog" ref={blogFormRef} >
+        <Togglable buttonId="new-blog-button" buttonLabel="new blog" ref={blogFormRef} >
           <h2>create new</h2>
           <BlogForm createBlog={addBlog} />
         </Togglable>
@@ -108,12 +108,12 @@ const App = () => {
         <h2>blogs</h2>
         <Notification info={info}/>
         <p>
-          {user.name} logged in <button onClick={handleLogOut}>logout</button>
+          {user.name} logged in <button id='logout-button' onClick={handleLogOut}>logout</button>
         </p>
       </div>
       {blogForm()}
       <div>
-        {blogs.sort((a, b) => a.likes - b.likes).map(blog =>
+        {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
           <Blog key={blog.id}
             blog={blog}
             user={user}
